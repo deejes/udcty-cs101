@@ -1,3 +1,5 @@
+#Question - https://www.youtube.com/watch?v=M_pkidxeGMY
+
 def binarycomp(num):
     #takes a number, returns a dictonary with results of binary composition of the number
     result = {}
@@ -5,13 +7,12 @@ def binarycomp(num):
     while x > -1:
         if num >= 2**x:
             num = num - 2**x
-            result[2**x] = 1
+            result[2**x] = "x"
             x -= 1
         else:
-            result[2**x] = 0
+            result[2**x] = "."
             x -= 1
     return result
-    
 def findpower(num):
     # return ln(base2)
     x = 0
@@ -19,7 +20,6 @@ def findpower(num):
         num = num/2
         x +=1
     return x
-
 def dotrep(num):
     # takes a power of 2 as input, represnts with 3 dots or x's as per problem instruction
     num = findpower(num)
@@ -34,4 +34,38 @@ def dotrep(num):
         else:
             answer = answer + "."
             x -=1
+    return answer
+def lookupindex(num): #  takes pattern# as input, returns dotindex for newlistfunc
+    index = binarycomp(num)
+    answer = {}
+    x = 128
+    while x >= 1:
+        answer[dotrep(x)] = index[x]
+        x = x/2
+    return answer 
+def newlistfunc(startstring,num): # takes input as int string &combination#,  returns next iteration
+    newstring = ''
+    x = 0
+    dotindex = lookupindex(num)
+    startstring += startstring[0]
+    while x < len(startstring)- 1:
+        answer = ''
+        if x == 0:
+            answer += startstring[x-2]
+            answer += startstring[x]
+            answer += startstring[x+1]
+        else:        
+            answer += startstring[x-1]
+            answer += startstring[x]
+            answer += startstring[x+1]
+        newstring += dotindex[answer]
+        x += 1
+    return newstring
+
+def cellular_automaton(startstring,num,iterations):
+    x = 0
+    answer = startstring
+    while x < iterations:
+        answer = newlistfunc(answer,num)
+        x += 1
     return answer
