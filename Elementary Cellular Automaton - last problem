@@ -2,7 +2,7 @@ def binarycomp(num):
     #takes a number, returns a dictonary with results of binary composition of the number
     result = {}
     x = 7
-    while x >= 0:
+    while x > -1:
         if num >= 2**x:
             num = num - 2**x
             result[2**x] = 1
@@ -11,3 +11,27 @@ def binarycomp(num):
             result[2**x] = 0
             x -= 1
     return result
+    
+def findpower(num):
+    # return ln(base2)
+    x = 0
+    while num > 1:
+        num = num/2
+        x +=1
+    return x
+
+def dotrep(num):
+    # takes a power of 2 as input, represnts with 3 dots or x's as per problem instruction
+    num = findpower(num)
+    x = 2
+    i = 0
+    answer = ''
+    while x >= 0:
+        if num >= 2**x:
+            num = num - 2**x
+            answer = answer + "x"
+            x -= 1
+        else:
+            answer = answer + "."
+            x -=1
+    return answer
