@@ -11,26 +11,14 @@
 # black joker, '?B', can be used as any spade or club
 # and the red joker, '?R', can be used as any heart 
 # or diamond.
-#
-# The itertools library may be helpful. Feel free to 
-# define multiple functions if it helps you solve the
-# problem. 
-#
-# -----------------
-# Grading Notes
-# 
-# Muliple correct answers will be accepted in cases 
-# where the best hand is ambiguous (for example, if 
-# you have 4 kings and 3 queens, there are three best
-# hands: 4 kings along with any of the three queens).
 
 import itertools
 
 def five_card_combo(hand):
     # takes 7 card hands, returns a list of all possible 5 card hands
-    combo_list = []
-    combo_list += itertools.combinations(hand,5)
-    return combo_list
+    hand_list = []
+    hand_list += itertools.combinations(hand,5)
+    return hand_list
     
 
 def replace_joker(hands):
@@ -39,7 +27,8 @@ def replace_joker(hands):
     jokers = []
     hand_list= []
     second_hand_list = []
-    for x in hands: # separates jokers and non jokers
+    for x in hands: 
+    # separates jokers and non jokers
         if x[0] != "?":
             njokers += x + " "
         else:
